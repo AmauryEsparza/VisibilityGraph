@@ -10,17 +10,13 @@ import java.util.ArrayList;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author alexhuleatt
- */
 public class DisplayFrame extends javax.swing.JFrame {
     MyPanel m;
     /**
      * Creates new form DisplayFrame
      */
     public DisplayFrame() {
-        super("Line of Sight and A*");
+        super("Visibility Graph");
         initComponents();
         Component[] c = this.getContentPane().getComponents();
         for (Component c1 : c) {
@@ -50,6 +46,8 @@ public class DisplayFrame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        myPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout myPanel1Layout = new javax.swing.GroupLayout(myPanel1);
         myPanel1.setLayout(myPanel1Layout);

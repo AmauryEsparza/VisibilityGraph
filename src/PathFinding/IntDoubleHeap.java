@@ -9,7 +9,7 @@ package PathFinding;
  * A quick and dirty array-based heap implementation, designed for use as a
  * priority queue. 
  *
- * @author alexhuleatt
+ * @author amauryesparza
  */
 public class IntDoubleHeap {
 

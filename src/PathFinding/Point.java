@@ -8,7 +8,7 @@ package PathFinding;
 
 /**
  *
- * @author alexhuleatt
+ * @author amauryesparza
  */
 public class Point {
 

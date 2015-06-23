@@ -16,10 +16,14 @@ import java.util.Arrays;
  */
 /**
  *
- * @author alexhuleatt
+ * @author amauryesparza
  */
 public class MyPanel extends javax.swing.JPanel {
 
+    private final int initialX = 10;
+    private final int initialY = 0;
+    private final int finalX = 10;
+    private final int finalY = 20;
     private Point[] path;
     private ArrayList<Point> obstacles;
     private Point[] waypoints;
@@ -42,7 +46,7 @@ public class MyPanel extends javax.swing.JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.black);
+        g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
 
         g.setColor(Color.red);
@@ -58,19 +62,19 @@ public class MyPanel extends javax.swing.JPanel {
         if (path != null) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setStroke(new BasicStroke(1));
-            Point current = new Point(0, 0);
+            Point current = new Point(initialX, initialY);
             g.setColor(Color.magenta);
             for (int i = 0; i < path.length; i++) {
                 g.drawLine(current.x * RECT_SIZE + RECT_SIZE / 2, current.y * RECT_SIZE + RECT_SIZE / 2, path[i].x * RECT_SIZE + RECT_SIZE / 2, path[i].y * RECT_SIZE + RECT_SIZE / 2);
-                g.setColor(Color.green);
+                //g.setColor(Color.green);
                 g.fillRect(current.x * RECT_SIZE, current.y * RECT_SIZE, RECT_SIZE, RECT_SIZE);
                 g.setColor(Color.magenta);
                 current = path[i];
             }
         }
-        g.setColor(Color.cyan);
-        g.fillRect(0,0,RECT_SIZE, RECT_SIZE);
-        g.fillRect(getWidth() - RECT_SIZE, getHeight() - RECT_SIZE, RECT_SIZE, RECT_SIZE);
+        g.setColor(Color.black);
+        g.fillRect((initialX*10), (initialY*10) ,RECT_SIZE, RECT_SIZE);
+        g.fillRect((finalX*10), (finalY*10), RECT_SIZE, RECT_SIZE);
     }
 
     public void path() {
@@ -79,7 +83,8 @@ public class MyPanel extends javax.swing.JPanel {
             g.addObstacle(p);
         }
         g.buildMatrix();
-        path = g.getPath(new Point(0, 0), new Point(getWidth() / RECT_SIZE - 1, getHeight() / RECT_SIZE - 1));
+        //path = g.getPath(new Point(0, 0), new Point(getWidth() / RECT_SIZE - 1, getHeight() / RECT_SIZE - 1));
+        path = g.getPath(new Point(initialX, initialY), new Point(finalX, finalY));
         System.out.println(Arrays.toString(path));
         waypoints = g.getWayPoints();
         num_waypoints = g.num_waypoints();

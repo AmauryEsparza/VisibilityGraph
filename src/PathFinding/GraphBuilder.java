@@ -7,7 +7,7 @@ import java.util.Arrays;
  * for constructing the adjacency matrix used to construct the path. Is super
  * sexy
  *
- * @author alexhuleatt
+ * @author amauryesparza
  */
 public class GraphBuilder {
 
