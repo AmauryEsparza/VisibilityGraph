@@ -1,6 +1,6 @@
 
-import PathFinding.GraphBuilder;
-import PathFinding.Point;
+import VisibilityGraph.GraphBuilder;
+import VisibilityGraph.Point;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -22,12 +22,13 @@ public class MyPanel extends javax.swing.JPanel {
 
     private final int initialX = 10;
     private final int initialY = 0;
-    private final int finalX = 10;
+    private final int finalX = 30;
     private final int finalY = 20;
     private Point[] path;
     private ArrayList<Point> obstacles;
     private Point[] waypoints;
     private int num_waypoints;
+    private int[][] adjMatrix;
     private static final int RECT_SIZE = 10;
     int last_x;
     int last_y;
@@ -59,9 +60,16 @@ public class MyPanel extends javax.swing.JPanel {
             g.fillRect(p.x * RECT_SIZE + RECT_SIZE / 4, p.y * RECT_SIZE + RECT_SIZE / 4, RECT_SIZE / 2, RECT_SIZE / 2);
         }
 
-        if (path != null) {
+        if (path != null && adjMatrix != null) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setStroke(new BasicStroke(1));
+            for(int i = 0; i < adjMatrix.length; i++){
+                for(int j = 0; j < adjMatrix[0].length; j++){
+                    if(adjMatrix[j][i] != 0 && adjMatrix[j][i] != -1){
+                        g.drawLine(waypoints[i].x * RECT_SIZE + RECT_SIZE / 2, waypoints[i].y * RECT_SIZE + RECT_SIZE / 2, waypoints[j].x * RECT_SIZE + RECT_SIZE / 2, waypoints[j].y * RECT_SIZE + RECT_SIZE / 2);
+                    }
+                }
+            }
             Point current = new Point(initialX, initialY);
             g.setColor(Color.magenta);
             for (int i = 0; i < path.length; i++) {
@@ -88,8 +96,9 @@ public class MyPanel extends javax.swing.JPanel {
         System.out.println(Arrays.toString(path));
         waypoints = g.getWayPoints();
         num_waypoints = g.num_waypoints();
+        adjMatrix = g.getAdjMatriz();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

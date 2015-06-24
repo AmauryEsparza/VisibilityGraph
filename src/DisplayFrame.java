@@ -1,6 +1,6 @@
 
-import PathFinding.GraphBuilder;
-import PathFinding.Point;
+import VisibilityGraph.GraphBuilder;
+import VisibilityGraph.Point;
 import java.awt.Component;
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ public class DisplayFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Display Path");
+        jButton1.setText("Construir Grafo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -60,7 +60,7 @@ public class DisplayFrame extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        jButton2.setText("Reset");
+        jButton2.setText("Limpiar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

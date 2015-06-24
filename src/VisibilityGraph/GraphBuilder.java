@@ -1,4 +1,4 @@
-package PathFinding;
+package VisibilityGraph;
 
 import java.util.Arrays;
 
@@ -33,6 +33,7 @@ public class GraphBuilder {
     public static final double octile_multiplier = 1.6;
 
     private int[][] adj_matrix;
+    private int [][] complete_matrix;
 
     public GraphBuilder(int length, int height) {
         this.length = length;
@@ -83,6 +84,8 @@ public class GraphBuilder {
             int distance = manhattan(waypoints[a], waypoints[b]);
             adj_matrix[a][b] = distance;
             adj_matrix[b][a] = distance;
+            complete_matrix[a][b] = distance;
+            complete_matrix[b][a] = distance;
             return true;
         } else {
             adj_matrix[a][b] = -1;
@@ -183,6 +186,7 @@ public class GraphBuilder {
         }
         last_object_index = obstacle_index;
         adj_matrix = new int[waypoint_index + 2][waypoint_index + 2];
+        complete_matrix = new int[waypoint_index + 2][waypoint_index + 2];
     }
 
     private boolean isOutsideCorner(int x, int y) {
@@ -329,6 +333,7 @@ public class GraphBuilder {
             closed_set[current] = true;
             for (int i = 0; i < adj_matrix[current].length; i++) { //visit all neighbors
                 if (!closed_set[i] && isVisible(i, current)) {
+                    System.out.println("Visible (" + i + "," + current+ ")");
                     double cost = adj_matrix[i][current] + g_costs[current]; //total cost to visit node i from current
                     if (!isInOpenSet[i] || cost < g_costs[i]) {
                         g_costs[i] = cost;
@@ -373,5 +378,18 @@ public class GraphBuilder {
         System.arraycopy(path, path.length - index, final_path, 0, index);
         return final_path;
     }
-
+    
+    public int[][] getAdjMatriz(){
+    
+        for(int i = 0; i < waypoint_index + 2; i++){
+            System.out.println("WayPoints " + i + "(" + waypoints[i].x + "," + waypoints[i].y + ")");
+        }
+        for(int i =0; i < adj_matrix.length; i++){
+            for(int j = 0; j < adj_matrix[0].length; j++){
+                System.out.print("(" + i + "," + j + "): " + adj_matrix[i][j]+"\t");
+            }
+            System.out.println();
+        }
+        return adj_matrix;
+    }
 }
